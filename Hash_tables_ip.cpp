@@ -195,8 +195,8 @@ bool searchRangeAny(string s1,string s2)
 }    
 
 
-ll byteSize(){
-    return 65536*1+size_of_hash/8;
+void byteSize(){
+    cout<<65536*1+size_of_hash/8<<" bytes"<<endl;
 }
 
 int main(){
@@ -205,11 +205,11 @@ int main(){
 	    chain[i]=NULL;
 	}
     insert("192.168.3.1");
-    cout<<byteSize()<<endl;
+    byteSize();
     insert("192.168.3.2");
     insert("192.168.3.3");
     insert("192.168.3.4");
-    cout<<byteSize()<<endl;
+    byteSize();
     insert("192.168.3.5");
     insert("192.168.3.6");
     insert("192.168.3.7");
@@ -223,5 +223,5 @@ int main(){
     insert("192.169.0.1");
     insert("192.169.0.2");
     insert("192.169.0.3");
-    cout<<byteSize()<<endl;
+    byteSize();
 }
