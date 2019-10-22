@@ -203,7 +203,7 @@ int main(){
 	for(ll i=0;i<65536;i++){
 		chain[i]=(struct Hash_table*)malloc(sizeof(struct Hash_table));
 	    chain[i]=NULL;
-	}
+	}/*
     insert("192.168.3.1");
     byteSize();
     insert("192.168.3.2");
@@ -223,5 +223,73 @@ int main(){
     insert("192.169.0.1");
     insert("192.169.0.2");
     insert("192.169.0.3");
-    byteSize();
+    byteSize();*/
+    int f=1;
+    while(f){
+		int n;
+    	cout<<"enter\n1.Insert\n2.Remove\n3.Search\n4.SearchRangeAll\n5.SearchRangeAny\n6.ByteSize\n";
+    	cin>>n;
+    	switch(n){
+    		case 1:{
+    			string s;
+    			cout<<"enter ip to be inserted\n";
+    			cin>>s;
+    			insert(s);
+				break;
+			}
+			case 2:{
+				string s;
+				cout<<"enter ip to be removed\n";
+				cin>>s;
+				remove_node(s);
+				break;
+			}
+			case 3:{
+				string s;
+				cout<<"enter ip to search\n";
+				cin>>s;
+				if(search(s)){
+					cout<<"found\n";
+				}
+				else{
+					cout<<"not found\n";
+				}
+				break;
+			}
+			case 4:{
+				string s1,s2;
+				cout<<"enter the first ip\n";
+				cin>>s1;
+				cout<<"enter the second ip\n";
+				cin>>s2;
+				if(searchRangeAll(s1,s2))
+					cout<<"all are present\n";
+				else
+					cout<<"not all present\n";
+				break;
+			}
+			case 5:{
+				string s1,s2;
+				cout<<"enter the first ip\n";
+				cin>>s1;
+				cout<<"enter the second ip\n";
+				cin>>s2;
+				if(searchRangeAny(s1,s2))
+					cout<<"atleast one ip is present\n";
+				else
+					cout<<"none of the ips from the given range are present\n";
+				break;
+			}
+			case 6:{
+				byteSize();
+				break;
+			}
+			default:{
+				cout<<"invalid choice\n";
+				break;
+			}
+		}
+		cout<<"1.perform one more operation\n0.exit\n";
+		cin>>f;
+	}
 }
