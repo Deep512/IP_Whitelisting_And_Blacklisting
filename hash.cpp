@@ -1,9 +1,7 @@
 #include<iostream>
 #include<bits/stdc++.h>
 #include<fstream>
-#include<cstdlib>
 #include<string>
-#include<string.h>
 
 using namespace std;
 struct bucket
@@ -63,13 +61,17 @@ int Hash_Table::net_part(string s)
 		}
 		if(count == 0)
 		{
-			s2 = s2 + s[i];
+			s1 = s1 + s[i];
 		}
 		if(count == 1)
 		{
-			s1 = s1+s[i];
+			s2 = s2+s[i];
 		}
 	}
+	int x1=stoi(s1);
+	int x2=stoi(s2);
+	int value=x1*256+x2;
+	return value;
 }
 
 int Hash_Table::hash_func(string s)
@@ -116,18 +118,24 @@ void Hash_Table::remove(string a)
 	int index = hash_func(a);
 	if(chain[index] == NULL)
 		return;
-	bucket* temp = chain[index];
-	bucket* prev = temp;
-	while(temp->ip != a || temp != NULL)
-	{
-		prev = temp;
-		temp = temp->next;	
-	}
-	if(temp == NULL)
+	bucket* temp =chain[index];
+	if(chain[index]->ip==a){
+		temp =chain[index];
+		chain[index]=chain[index]->next;
+		hash_size -= sizeof(bucket);
+		delete temp;
 		return;
-	prev->next = temp->next;
-	delete temp;	
-	hash_size -= sizeof(bucket);		
+	}
+	while(temp->next){
+		if(temp->next->ip==a){
+			bucket* node=temp->next;
+			temp->next=temp->next->next;
+			delete node;
+			hash_size-=sizeof(bucket);
+			return;
+		}
+		temp=temp->next;
+	}		
 }
 
 bool Hash_Table::search(string a)
@@ -136,7 +144,7 @@ bool Hash_Table::search(string a)
 	if(chain[index] == NULL)
 		return 0;
 	bucket* temp = chain[index];
-	while(temp->next!=NULL)
+	while(temp!=NULL)
 	{
 		if(temp->ip == a)
 		{
@@ -254,7 +262,11 @@ bool Hash_Table::searchRangeAny(string a, string b)
 			}
 			temp = temp->next;
 		}
-		hosta++;			
+		hosta++;
+		if(hosta==65536){
+			hosta=0;
+			neta++;
+		}			
 	}
 	if(neta == netb)
 	{
@@ -283,25 +295,40 @@ int Hash_Table::byteSize()
 int main()
 {
 	Hash_Table DS;
+	/*
 	DS.insert("192.168.3.1");
-    DS.byteSize();
+    cout<<DS.byteSize()<<endl;
     DS.insert("192.168.3.2");
     DS.insert("192.168.3.3");
-    DS.insert("192.168.3.4");
-    DS.byteSize();
-    DS.insert("192.168.3.5");
+    DS.insert("192.168.3.4");*/
+    cout<<DS.byteSize()<<endl;
+	for(int k=0;k<256;k++){
+	string s="192." ;
+	s=s + to_string(k) +".";
+	for(int i=0;i<=255;i++){
+		string a=s+to_string(i)+".";
+		for(int j=0;j<256;j++){
+			string b=a+to_string(j);
+			DS.insert(b);
+			b=s;
+		}
+		a=s;
+	}}
+    /*DS.insert("192.168.3.5");
     DS.insert("192.168.3.6");
     DS.insert("192.168.3.7");
     DS.insert("192.168.3.8");
     DS.insert("192.168.3.9");
     DS.insert("192.168.3.10");
-    DS.insert("192.168.255.253");
-    DS.insert("192.168.255.254");
-    DS.insert("192.168.255.255");
-    DS.insert("192.169.0.0");
-    DS.insert("192.169.0.1");
-    DS.insert("192.169.0.2");
-    DS.insert("192.169.0.3");
-    cout<<DS.search("192.168.3.1");
-
+    DS.insert("255.168.255.253");
+    DS.insert("255.168.255.254");
+    DS.insert("255.168.255.255");
+    DS.insert("255.169.0.0");
+    DS.insert("255.169.0.1");
+    DS.insert("255.169.0.2");
+    DS.insert("255.169.0.3");*/
+	cout<<DS.byteSize()<<endl;
+    cout<<DS.searchRangeAny("192.255.0.0","192.255.255.255")<<endl;
+	DS.remove("192.255.255.128");
+	cout<<DS.searchRangeAll("192.255.0.0","192.255.255.255")<<endl;
 }
