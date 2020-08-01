@@ -8,12 +8,13 @@ Using Tries, Lists, Hash_Tables, Radix_Trees and comparing their efficiencies
 `$ git clone https://github.com/Deep512/IP_Whitelisting_And_Blacklisting/`<br /><br />
 
 2. Run the .cpp files individually<br />
-`$ g++ <name-of-file>`<br />
-Files are:
-- Hash.cpp
-- List.cpp
-- Tries.cpp
-- Radix.cpp
+`$ g++ <name-of-file>`<br /><br />
+
+- Files are:
+  - Hash.cpp  
+  - List.cpp
+  - Tries.cpp
+  - Radix.cpp
 
 
 
