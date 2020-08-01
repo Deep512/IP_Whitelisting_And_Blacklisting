@@ -10,7 +10,7 @@ Using Tries, Lists, Hash_Tables, Radix_Trees and comparing their efficiencies
 2. Run the .cpp files individually<br />
 `$ g++ <name-of-file>`<br /><br />
 
-- Files are:
+Files are:
  - Hash.cpp  
  - List.cpp
  - Tries.cpp
