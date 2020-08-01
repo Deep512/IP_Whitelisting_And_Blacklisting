@@ -11,10 +11,10 @@ Using Tries, Lists, Hash_Tables, Radix_Trees and comparing their efficiencies
 `$ g++ <name-of-file>`<br /><br />
 
 - Files are:
-  - Hash.cpp  
-  - List.cpp
-  - Tries.cpp
-  - Radix.cpp
+ - Hash.cpp  
+ - List.cpp
+ - Tries.cpp
+ - Radix.cpp
 
 
 
